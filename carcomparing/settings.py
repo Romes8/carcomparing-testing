@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'carcomparing.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ko7nzgn327g7qk2k',
+        'USER': 'iybcqy5m1u8i3fhr',
+        'PASSWORD': 'fmrolp64wh5anz4b',
+        'HOST': 'esilxl0nthgloe1y.chr7pe7iynqr.eu-west-1.rds.amazonaws.com',
+        'PORT': '3306',
     }
 }
 
