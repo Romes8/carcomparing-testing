@@ -1,1 +1,103 @@
-indeex
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="main">Pick your cars and see which suits you better.</h1>
+<br></br>
+<div class="custom-center">
+    <div class="row">
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+            <img src="https://images.interactives.dk/panamera-turbo-05-SNG7uBvAq9hUg6grpswPLA.jpg?auto=compress&ch=Width%2CDPR&dpr=1.5&ixjsv=2.2.4&q=66&rect=341%2C2%2C2918%2C2020&w=960" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Porsche Panamera</h5>
+              <h5 class="card-title">110,000 $</h5>
+              <p class="card-text">No matter what are you dreaming of. Porsche is one of the things you need to have in your life. </p>
+              <a href="#" class="btn btn-primary">More info</a>
+              <a href="#" class="btn btn-primary">Compare</a>
+            </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+            <img src="https://www.carpixel.net/t/100760/d5a547fe54660cbc97ac5f9b8746e742.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Mercedes S Class</h5>
+              <h5 class="card-title">155,000 $</h5>
+              <p class="card-text">Always wanted luxury? This is something for you. No need to hesitate.</p>
+              <a href="#" class="btn btn-primary">More info</a>
+              <a href="#" class="btn btn-primary">Compare</a>
+            </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+            <img src="https://sf2.autoplus.fr/wp-content/uploads/autoplus/2021/08/89-jaguar-xe-xf-r-dynamic-black-01.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Jaguar XE</h5>
+              <h5 class="card-title">80,000 $</h5>
+              <p class="card-text">Always wanted to feel like British royal family. Just go fot itm its so easy.</p>
+              <a href="#" class="btn btn-primary">More info</a>
+              <a href="#" class="btn btn-primary">Compare</a>
+            </div>
+        </div>
+      </div>
+    </div>
+    <br></br>
+    <div class="row">
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img src="https://pictures.dealer.com/a/alirondalelr/0946/ce60ce81a2ffd9419c42950ae5e49a80x.jpg?impolicy=downsize&w=568" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Range Rover Velar</h5>
+                  <h5 class="card-title">122,000 $</h5>
+                  <p class="card-text">Range rover is must to have in each modern family where off road is always welcome.</p>
+                  <a href="#" class="btn btn-primary">More info</a>
+                  <a href="#" class="btn btn-primary">Compare</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img src="https://evglobe.com/wp-content/uploads/2020/02/Tesla-Model-X-1700x956.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Tesla X</h5>
+                  <h5 class="card-title">85,000 $</h5>
+                  <p class="card-text">Are you also a fan of memes as Elon Musk? Support his empite and get one of these beauties.</p>
+                  <a href="#" class="btn btn-primary">More info</a>
+                  <a href="#" class="btn btn-primary">Compare</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img src="https://automacha.com/wp-content/uploads/2020/08/bmw-x7-1024x576.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">BMW MX7</h5>
+                  <h5 class="card-title">125,000 $</h5>
+                  <p class="card-text">German quality and luxury at this huge mansion on wheels. No more explanation needed.</p>
+                  <a href="#" class="btn btn-primary">More info</a>
+                  <a href="#" class="btn btn-primary">Compare</a>
+                </div>
+            </div>
+        </div>
+      </div>
+</div>
+
+
+
+<style>
+ .main {
+     text-align: center;
+     color: black;
+     font-size: 50px;
+     margin-top: 40px;
+ }
+
+ .custom-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 85%;
+ }
+</style>
+{% endblock %}
