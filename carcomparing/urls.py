@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from cars.views import index_page, home_page, car_page, compare_page
+from cars.views import index_page, home_page, car_page, compare_page, choose_compare
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,4 +23,5 @@ urlpatterns = [
     path('index/', index_page, name='index'),
     path('car/', car_page, name="car"),
     path('compare/', compare_page, name="compare"),
+    path('choose_compare/', choose_compare, name="choose compare"),
 ]

@@ -22,3 +22,6 @@ def car_page(request):
 
 def compare_page(request):
     return render(request, "compare.html")
+
+def choose_compare(request):
+    return render(request, 'choose_compare.html')
