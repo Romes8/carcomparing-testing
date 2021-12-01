@@ -16,3 +16,9 @@ def home_page(request):
 def index_page(request):
     print('index_page rendered')
     return render(request, 'index.html')
+
+def car_page(request):
+    return render(request, 'car.html')
+
+def compare_page(request):
+    return render(request, "compare.html")
