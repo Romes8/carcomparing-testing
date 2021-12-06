@@ -20,6 +20,11 @@ class Car(models.Model):
     top_speed = models.IntegerField()
     acceleration_to_100 = models.IntegerField()
     price = models.IntegerField()
+    
+    class Meta:
+        managed = False
+        db_table = 'cars_car'
+   
 
 
 

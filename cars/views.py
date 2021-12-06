@@ -9,7 +9,7 @@ import threading
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-
+import cars.func as func
 
 
 # Create your views here.
@@ -50,11 +50,18 @@ def login_page(request):
 
 @login_required
 def car_page(request):
+  
     return render(request, 'car.html')
 
 @login_required
 def compare_page(request):
-    return render(request, "compare.html")
+    car_name1 = request.GET.get('car1')
+    car_name2 = request.GET.get('car2')
+    
+    car1 = func.get_car(car_name1)
+    car2 = func.get_car(car_name2)
+    
+    return render(request, "compare.html", {'car1': car1, 'car2': car2})
 
 @login_required
 def choose_compare_page(request):
