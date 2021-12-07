@@ -1,5 +1,5 @@
 from django.http.response import HttpResponse
-from cars.models import Car
+from cars.models import Car, Image
 import datetime
 
 #get all data from a car model
@@ -7,6 +7,9 @@ def get_car(car):
     count = 0
     data = []
     carres = Car.objects.get(car_model=car)
+    print(carres.id)
+    car_id = Image.objects.filter(car_id_id=carres.id)
+    
     print(carres.car_model)
 
     data.append({
@@ -28,6 +31,13 @@ def get_car(car):
         "acceleration": carres.acceleration_to_100,
         "price": carres.price,
     })
+    
+    for im in car_id:
+        data.append({
+            "image": im.link,
+        })
+        print("once")
+        break
     
     print("Ended")
     return data

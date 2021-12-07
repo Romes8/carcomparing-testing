@@ -4,14 +4,15 @@
 <div class="table-responsive">
   <table class="table fa-check text-successtable-border border-light ml-1">
     <thead class="border-light">
+      {% for f in car1%}
+      {% for s in car2%}
+      console.log("Count");
         <tr>
             <th scope="col"></th>
-            <th scope="col"><img src="https://www.carpixel.net/t/100760/d5a547fe54660cbc97ac5f9b8746e742.jpg" alt="..."></th>
-            <th scope="col"><img src="https://images.interactives.dk/panamera-turbo-05-SNG7uBvAq9hUg6grpswPLA.jpg?auto=compress&ch=Width%2CDPR&dpr=1.5&ixjsv=2.2.4&q=66&rect=341%2C2%2C2918%2C2020&w=960" alt="..."></th>
+            <th scope="col"><img src={{f.image}} alt={{f.model}}></th>
+            <th scope="col"><img src={{s.image}} alt={{s.model}}></th>
           </tr>
         <tr>
-        {% for f in car1%}
-        {% for s in car2%}
         <th scope="col"></th>
         <th scope="col"><strong>{{f.brand}} {{f.model}}</strong></th>
         <th scope="col"><strong>{{s.brand}} {{s.model}}</strong></th>
@@ -91,6 +92,11 @@
         <th scope="row">Wheel size</th>
         <td>{{f.wheels}} "</td>
         <td>{{f.wheels}} "</td>
+      </tr>
+      <tr>
+        <th scope="row">Description</th>
+        <td>{{f.description}} "</td>
+        <td>{{f.description}} "</td>
       </tr>
     </tbody>
     {% endfor %}
