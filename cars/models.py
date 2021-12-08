@@ -25,5 +25,5 @@ class Car(models.Model):
 
 class Image(models.Model):
     id = models.IntegerField
-    link = models.CharField(max_length=70)
+    link = models.CharField(max_length=250)
     car_id = models.ForeignKey('Car', on_delete=models.CASCADE)
