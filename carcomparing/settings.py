@@ -85,6 +85,9 @@ DATABASES = {
         'PASSWORD': 'fmrolp64wh5anz4b',
         'HOST': 'esilxl0nthgloe1y.chr7pe7iynqr.eu-west-1.rds.amazonaws.com',
         'PORT': '3306',
+        'TEST': {
+            'NAME': 'ko7nzgn327g7qk2k',
+        },
     }
 }
 
