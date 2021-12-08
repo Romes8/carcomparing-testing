@@ -61,7 +61,10 @@ def compare_page(request):
     car1 = func.get_car(car_name1)
     car2 = func.get_car(car_name2)
     
-    return render(request, "compare.html", {'car1': car1, 'car2': car2})
+    print(car1['power'])
+    result = func.compare(car1, car2)
+    
+    return render(request, "compare.html", {'car1': car1, 'car2': car2, 'result': result})
 
 @login_required
 def choose_compare_page(request):
