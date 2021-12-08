@@ -1,5 +1,5 @@
 from django.http.response import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import get_list_or_404, get_object_or_404, render, redirect
 from django.http import HttpResponse, request
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
@@ -11,7 +11,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 import cars.func as func
 from .forms import CommentForm
-from .models import Car
+from .models import Car, Image
 
 
 # Create your views here.
@@ -22,8 +22,8 @@ def home_page(request):
 
 @login_required
 def index_page(request):
-    print('index_page rendered')
-    return render(request, 'index.html')
+    cars = get_list_or_404(Car)
+    return render(request, 'index.html', {'cars':cars})
 
 
 def logout_page(request):
@@ -53,9 +53,11 @@ def login_page(request):
 @login_required
 def car_page(request, model):
     car = get_object_or_404(Car, car_model=model)
+    images = get_list_or_404(Image, car_id=car.id)
+    print(images)
     if car:
-        return render(request, 'car.html', {'car':car})
-        
+        return render(request, 'car.html', {'car':car, 'images':images, 'range':range(1,len(images))})
+
 @login_required
 def compare_page(request):
     car_name1 = request.GET.get('car1')

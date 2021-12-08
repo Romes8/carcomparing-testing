@@ -5,10 +5,10 @@ from .models import Car, Image, Comment
 
 admin.site.register(Car)
 admin.site.register(Image)
-admin.site.register(Comment)
 
+@admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('name', 'body', 'post', 'rating', 'created_on', 'active')
+    list_display = ('name', 'body', 'car', 'rating', 'created_on', 'active')
     list_filter = ('active', 'created_on')
     search_fields = ('name', 'email', 'body', 'rating')
     actions = ['approve_comments']

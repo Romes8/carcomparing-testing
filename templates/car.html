@@ -6,39 +6,20 @@
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="5" aria-label="Slide 6"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="6" aria-label="Slide 7"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="7" aria-label="Slide 8"></button>
+    {%for i in range%}
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{i}}" aria-label="Slide {{i|add:'1'}}"></button>
+    {%endfor%}
   </div>
   <div class="carousel-inner" style="text-align: center;">
     <div class="carousel-item active" >
-      <img src="https://images.interactives.dk/panamera-turbo-05-SNG7uBvAq9hUg6grpswPLA.jpg?auto=compress&ch=Width%2CDPR&dpr=1.5&ixjsv=2.2.4&q=66&rect=341%2C2%2C2918%2C2020&w=960" alt="...">
+      <img src={{images.0.link}} alt="...">
+
     </div>
+    {% for image in images|slice:"1:"%}
     <div class="carousel-item">
-      <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2021-porsche-panamara-turbo-s-101-1600789259.jpg?crop=0.649xw:0.548xh;0.239xw,0.380xh&resize=2048:*" alt="...">
+      <img src={{image.link}} alt="...">
     </div>
-    <div class="carousel-item">
-      <img src="https://files.porsche.com/filestore/image/multimedia/none/model-series-g2-2nd-panamera-highlights-04/normal/768c597f-d282-11ea-80cc-005056bbdc38;sM;twebp;c1697;gc/porsche-normal.webp" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="https://files.porsche.com/filestore/image/multimedia/none/model-series-g2-2nd-panamera-intro/preview/a0519320-d30a-11ea-80cc-005056bbdc38;sN;twebp/porsche-preview.webp" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="https://files.porsche.com/filestore/image/multimedia/none/g2-2nd-panamera-design-gallery-01/normal/c177c823-be33-11eb-80d7-005056bbdc38;sK;twebp/porsche-normal.webp" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="https://files.porsche.com/filestore/image/multimedia/none/g2-2nd-panamera-design-gallery-02/normal/ff895fca-be34-11eb-80d7-005056bbdc38;sK;twebp/porsche-normal.webp" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="https://files.porsche.com/filestore/image/multimedia/none/g2-2nd-panamera-design-gallery-03/normal/259a1632-ff33-11ea-80ce-005056bbdc38;sK;twebp/porsche-normal.webp" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="https://files.porsche.com/filestore/image/multimedia/none/g2-2nd-panamera-design-gallery-04/normal/b2462191-be35-11eb-80d7-005056bbdc38;sK;twebp/porsche-normal.webp" alt="...">
-    </div>
+    {% endfor %}
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
