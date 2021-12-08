@@ -3,12 +3,16 @@ from http import HTTPStatus
 from django.test import TestCase
 
 class CommentFormViewTests(TestCase):
+    def setUp(self):
+        self.client.post("/login/", data={'username':'Roman', 'password':'testing1password1'})
+
     def test_get(self):
         response = self.client.get("/car_comments/Cayenne/")
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertContains(response, "<h1>Porsche Cayenne</h1>", html=True)
-        self.assertContains(response, "<h2>1 comments</h2>", html=True)
+        self.assertContains(response, "<h2>2 comments</h2>", html=True)
+        self.assertContains(response, "<i>Average Rating: <b style='color: darkgoldenrod;'>8.5/10</b></i>", html=True)
     
     def test_success_post(self):
         response = self.client.post("/car_comments/Cayenne/", data={'name': 'Joe', 'email':'joe.winston@gmail.com', 'body':'Great car!', 'rating':7})

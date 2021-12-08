@@ -26,6 +26,6 @@ urlpatterns = [
     path('car/<str:model>', car_page, name="car"),
     path('compare/', compare_page, name="compare"),
     path('choose_compare_page/', choose_compare_page, name="choose compare page"),
-    path('car_comments/<str:model>', car_comment, name="comment"),
+    path('car_comments/<str:model>/', car_comment, name="comment"),
     
 ]

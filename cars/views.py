@@ -75,7 +75,7 @@ def compare_page(request):
 def choose_compare_page(request):
     return render(request, 'choose_compare_page.html')
 
-
+@login_required
 def car_comment(request, model):
     car = get_object_or_404(Car, car_model=model)
     comments = car.comments.filter(active=True)
