@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from cars.views import index_page, home_page, car_page, compare_page, choose_compare_page, login_page, logout_page
+from cars.views import index_page, home_page, car_comment, car_page, compare_page, choose_compare_page, login_page, logout_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,9 +23,9 @@ urlpatterns = [
     path('login/', login_page, name="login"),
     path('logout/', logout_page, name='logout'),
     path('index/', index_page, name='index'),
-    path('car/', car_page, name="car"),
+    path('car/<str:model>', car_page, name="car"),
     path('compare/', compare_page, name="compare"),
     path('choose_compare_page/', choose_compare_page, name="choose compare page"),
-    
+    path('car_comments/<str:model>', car_comment, name="comment"),
     
 ]

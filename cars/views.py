@@ -1,5 +1,5 @@
 from django.http.response import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse, request
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
@@ -10,6 +10,8 @@ from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 import cars.func as func
+from .forms import CommentForm
+from .models import Car
 
 
 # Create your views here.
@@ -49,10 +51,11 @@ def login_page(request):
     return render(request, "login.html")
 
 @login_required
-def car_page(request):
-  
-    return render(request, 'car.html')
-
+def car_page(request, model):
+    car = get_object_or_404(Car, car_model=model)
+    if car:
+        return render(request, 'car.html', {'car':car})
+        
 @login_required
 def compare_page(request):
     car_name1 = request.GET.get('car1')
@@ -69,3 +72,29 @@ def compare_page(request):
 @login_required
 def choose_compare_page(request):
     return render(request, 'choose_compare_page.html')
+
+
+def car_comment(request, model):
+    car = get_object_or_404(Car, car_model=model)
+    comments = car.comments.filter(active=True)
+    ratings = 0
+    average_rating = 0
+    if comments:    
+        for comment in comments:
+            ratings += comment.rating
+        average_rating = ratings / len(comments)
+    new_comment = None
+    if request.method == 'POST':
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.car = car
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
+
+    return render(request, "car_comments.html", {'car': car, 
+                                                'comments': comments,
+                                                'average_rating': average_rating,
+                                                'new_comment':new_comment, 
+                                                'comment_form':comment_form})

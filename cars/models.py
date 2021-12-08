@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 class Car(models.Model):
@@ -34,3 +35,17 @@ class Image(models.Model):
     car_id = models.ForeignKey('Car', on_delete=models.CASCADE)
 
 
+class Comment(models.Model):
+    car = models.ForeignKey('Car', on_delete=models.CASCADE, related_name='comments')
+    name = models.CharField(max_length=50)
+    email = models.EmailField()
+    body = models.TextField()
+    rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
+    created_on = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['created_on']
+    
+    def __str__(self):
+        return 'Comment {} by {}'.format(self.body, self.name)

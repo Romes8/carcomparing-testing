@@ -50,55 +50,41 @@
   </button>
 </div>
 </div>
-<h1 class="display-3"><b>Porsche Panamera Turbo S 2021</b></h1>
+<h1 class="display-3"><b>{{car.car_brand}} {{car.car_model}}</b></h1>
+<a href="/car_comments/{{car.car_model}}" style="text-decoration: none; color: #000;"><button type="button" class="btn btn-info">Read/Leave a comment</button></a>
 <hr>
 <h1 class="display-6 ml-1">Overview</h1>
-    <p class="ml-1">Originally thought to be too big of a departure for the storied sports car brand, the Panamera Turbo launched Porsche into the luxury sedan marketplace—allowing its high-performance ethos to reach a new audience. The 2021 Panamera Turbo S and Turbo S E-Hybrid take the speed-focused super-sedan into a new era with 620- and 689-hp powertrains, respectively. Although not quite as agile as Porsche's sports cars, the Panamera Turbo S range holds its own against rival sedans such as the Audi RS7, the BMW M5, and the Mercedes-AMG GT63. Its interior is nicely trimmed and well equipped—although the best features cost much extra to add on—and space is plentiful, especially in the long-wheelbase Executive models. Cargo space is generous too, as the Panamera cleverly hides a large cargo bay beneath its sloped hatchback. Looking for even more practicality? Consider the wagon-bodied Panamera Sport Turismo models, which we review separately.</p>
+    <p class="ml-1">{{car.car_description}}</p>
   <hr>
+<div class="ml-1">
+  <div class="row"><div class="col">Price</div><div class="col">€ {{car.price}}</div></div>
+</div>
 <h1 class="display-6 ml-1">Vehicle</h1>
 <div class="ml-1">
-  <div class="row"><div class="col">EPA Classification</div><div class="col">Large Cars</div></div>
-  <div class="row"><div class="col">Drivetrain</div><div class="col">All Wheel Drive</div></div>
+  <div class="row"><div class="col">Classification</div><div class="col">{{car.body_type}}</div></div>
+  <div class="row"><div class="col">Drivetrain</div><div class="col">{{car.drive_type}}</div></div>
+  <div class="row"><div class="col">Transmission</div><div class="col">{{car.transmission_type}}</div></div>
+  <div class="row"><div class="col">Seating capacity</div><div class="col">{{car.seating_capacity}}</div></div>
 </div>
 
 <hr>
 <h1 class="display-6 ml-1">Engine</h1>
 <div class="ml-1">
-  <div class="row"><div class="col">Engine Order Code</div><div class="col">NA</div></div>
-  <div class="row"><div class="col">Engine Type and Required Fuel</div><div class="col">Twin Turbo Premium Unleaded V-8</div></div>
-  <div class="row"><div class="col">Displacement (liters/cubic inches)</div><div class="col">4.0 L/244</div></div>
-  <div class="row"><div class="col">Fuel System</div><div class="col">Gasoline Direct Injection</div></div>
-  <div class="row"><div class="col">Maximum Horsepower @RPM</div><div class="col">620 @ 6000</div></div>
-  <div class="row"><div class="col">Maximum Torque @RPM</div><div class="col">604 @ 2300</div></div>
-  <div class="row"><div class="col">Cooling System Capacity (quarts)</div><div class="col">NA</div></div>
+  <div class="row"><div class="col">Power</div><div class="col">{{car.power}} Hp</div></div>
+  <div class="row"><div class="col">Tourque</div><div class="col">{{car.tourque}}</div></div>
+  <div class="row"><div class="col">Engine Type</div><div class="col">{{car.engine_type}}</div></div>
+  <div class="row"><div class="col">Fuel Type</div><div class="col">{{car.fuel_type}}</div></div>
+  <div class="row"><div class="col">Number of cylinders</div><div class="col">{{car.no_of_cylinder}}</div></div>
+  <div class="row"><div class="col">Valves per cylinder</div><div class="col">{{car.valves_per_cylinder}}</div></div>
 </div>
 <hr>
-<h1 class="display-6 ml-1">Transmission</h1>
+<h1 class="display-6 ml-1">Other</h1>
 <div class="ml-1">
-  <div class="row"><div class="col">Transmission Order Code</div><div class="col">G1G</div></div>
-  <div class="row"><div class="col">Transmission Description</div><div class="col">Auto-Shift Manual w/OD</div></div>
-  <div class="row"><div class="col">Number of Transmission Speeds</div><div class="col">8</div></div>
-  <div class="row"><div class="col">First Gear Ratio(:1)</div><div class="col">5.97</div></div>
-  <div class="row"><div class="col">Second Gear Ratio(:1)</div><div class="col">3.24</div></div>
-  <div class="row"><div class="col">Third Gear Ratio(:1)</div><div class="col">2.08</div></div>
-  <div class="row"><div class="col">Fourth Gear Ratio(:1)</div><div class="col">1.42</div></div>
-  <div class="row"><div class="col">Fifth Gear Ratio(:1)</div><div class="col">1.05</div></div>
-  <div class="row"><div class="col">Sixth Gear Ratio(:1)</div><div class="col">0.84</div></div>
-  <div class="row"><div class="col">Seventh Gear Ratio(:1)</div><div class="col">0.68</div></div>
-  <div class="row"><div class="col">Eighth Gear Ratio(:1)</div><div class="col">0.53</div></div>
-  <div class="row"><div class="col">Reverse Ratio(:1)</div><div class="col">5.22</div></div>
-  <div class="row"><div class="col">Final Drive Axle Ratio(:1)</div><div class="col">3.36</div></div>
-  <div class="row"><div class="col">Clutch Size</div><div class="col">NA</div></div>
+  <div class="row"><div class="col">Top speed</div><div class="col">{{car.top_speed}} Km/h</div></div>
+  <div class="row"><div class="col">Acceleration</div><div class="col">{{car.acceleration_to_100}} seconds</div></div>
+  <div class="row"><div class="col">Wheel size</div><div class="col">{{car.wheel_size}} "</div></div>
 </div>
 <hr>
-<h1 class="display-6 ml-1">Fuel Economy and Range</h1>
-<div class="ml-1">
-  <div class="row"><div class="col">EPA Greenhouse Gas Score</div><div class="col">NA</div></div>
-  <div class="row"><div class="col">CO2 Emissions, 15K mi/year (tons)</div><div class="col">10.4</div></div>
-  <div class="row"><div class="col">Range, city/highway (miles)</div><div class="col">355.50 / 497.70</div></div>
-  <div class="row"><div class="col">EPA Fuel Economy, combined/city/highway (mpg)</div><div class="col">17 / 15 / 21</div></div>
-  <div class="row"><div class="col">EPA Fuel Economy Equivalent (for hybrid and electric vehicles), combined/city/highway (MPGe)</div><div class="col">NA / NA / NA</div></div>
-</div>
 </div>
 <style>
     .carousel .item {
