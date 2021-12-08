@@ -20,6 +20,11 @@ class Car(models.Model):
     top_speed = models.IntegerField()
     acceleration_to_100 = models.IntegerField()
     price = models.IntegerField()
+    
+    class Meta:
+        managed = False
+        db_table = 'cars_car'
+   
 
 
 
@@ -27,3 +32,5 @@ class Image(models.Model):
     id = models.IntegerField
     link = models.CharField(max_length=250)
     car_id = models.ForeignKey('Car', on_delete=models.CASCADE)
+
+
