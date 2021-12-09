@@ -6,6 +6,9 @@
     {% if result == True %}
       <h2 style="color: red">Fill in both fields</h2>
     {% endif %}
+    {% if nocar %}
+      <h2 style="color: red">{{carname}} car does not exist</h2>
+    {% endif %}
 <div class="container mt-5">
 <form autocomplete="off" action="compare/" class="row justify-content-sm-center">
     <div class="col col-lg-2 autocomplete">

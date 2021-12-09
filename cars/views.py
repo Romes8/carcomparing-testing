@@ -60,26 +60,35 @@ def car_page(request, model):
 
 @login_required
 def compare_page(request):
+    result = False
+    nocar = False
+    args1 = {}
     
     car_name1 = request.GET.get('car1')
     car_name2 = request.GET.get('car2')
-
     
     if(car_name1 != "" and car_name2 != ""):
-        result = False
+      
+        try:
+            car1 = func.get_car(car_name1)
+        except:
+            args1 = {"carname": car_name1, "nocar": True}
+            return render(request, "choose_compare_page.html", args1)
 
-        car1 = func.get_car(car_name1)
-        car2 = func.get_car(car_name2)
-        
-        print(car1['power'])
+        try:   
+            car2 = func.get_car(car_name2)
+        except:
+            args1 = {"carname": car_name2, "nocar": True}    
+            return render(request, "choose_compare_page.html", args1)
+ 
         result = func.compare(car1, car2)
         
         return render(request, "compare.html", {'car1': car1, 'car2': car2, 'result': result})
     else:
         print("car has empty field name")
-        args ={}
-        args["result"] = True
-        return render(request, "choose_compare_page.html", args)
+        args2 ={}
+        args2["result"] = True
+        return render(request, "choose_compare_page.html", args2)
 
 
 @login_required
