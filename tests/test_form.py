@@ -11,7 +11,7 @@ class CommentFormTests(TestCase):
     def test_name_ending_full_stop(self):
         form = CommentForm(data={'name': "Joe."})
 
-        self.assertEqual(form.errors['name'], ["Should not end with a full stop"])
+        self.assertEqual(form.errors['name'], ["Should not end with a full stop", "Should contain only letters (a-z/A-Z)"])
 
     def test_name_contains_invalid_characters(self):
         form = CommentForm(data={'name':'J#oe'})
