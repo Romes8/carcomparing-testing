@@ -23,6 +23,7 @@ def home_page(request):
 @login_required
 def index_page(request):
     cars = get_list_or_404(Car)
+    print(cars)
     return render(request, 'index.html', {'cars':cars})
 
 

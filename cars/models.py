@@ -26,7 +26,9 @@ class Car(models.Model):
     class Meta:
         managed = True
         db_table = 'cars_car'
-   
+    
+    def __str__(self):
+        return f"{self.car_brand} {self.car_model}"
 
 
 

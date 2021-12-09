@@ -1,10 +1,32 @@
 from http import HTTPStatus
+from django.http import response
 
 from django.test import TestCase
 
+from cars.models import Car
+
+class IndexViewTests(TestCase):
+    def setUp(self):
+        self.client.post("/login/", data={'username':'test', 'password':'testing1pass'})
+    
+    def test_get(self):
+        response = self.client.get("/index/")
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertContains(response, "<h1 class='main'>Pick your cars and see which suits you better.</h1>", html=True)
+    
+    def test_view_uses_correct_template(self):
+        response = self.client.get("/index/")
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertTemplateUsed(response, 'index.html')
+    
+    def tearDown(self):
+        self.client.get('/logout/')
+
 class CommentFormViewTests(TestCase):
     def setUp(self):
-        self.client.post("/login/", data={'username':'Roman', 'password':'testing1password1'})
+        self.client.post("/login/", data={'username':'test', 'password':'testing1pass'})
 
     def test_get(self):
         response = self.client.get("/car_comments/Cayenne/")
@@ -28,3 +50,8 @@ class CommentFormViewTests(TestCase):
         self.assertContains(response, "Enter a valid email address.", html=True)
         self.assertContains(response, "Rating should be between 1 and 10", html=True)
         
+    def test_view_uses_correct_template(self):
+        response = self.client.get("/car_comments/Cayenne/")
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertTemplateUsed(response, 'car_comments.html')
