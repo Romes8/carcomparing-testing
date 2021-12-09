@@ -1,33 +1,115 @@
 from http import HTTPStatus
 from django.http import response
-
+from django.contrib.auth.models import User
 from django.test import TestCase
+from cars.forms import CommentForm
+from cars.models import Car, Comment, Image
 
-from cars.models import Car
+class LogInTest(TestCase):
+    def setUp(self):
+        self.credentials = {
+            'username': 'unittest',
+            'password': 'password1'}
+        User.objects.create_user(**self.credentials)
+
+    def test_login(self):
+        response = self.client.post('/login/', self.credentials, follow=True)
+
+        self.assertTrue(response.context['user'].is_active)
+
+class LogOutTest(TestCase):
+    def setUp(self):
+        self.client.login(username='test', password='testing1pass')
+    
+    def test_logout(self):
+        self.client.logout()
+
+        response = self.client.get('/index/')
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, "/login/?next=/index/")
+
 
 class IndexViewTests(TestCase):
     def setUp(self):
-        self.client.post("/login/", data={'username':'test', 'password':'testing1pass'})
+        self.client.login(username='test', password='testing1pass')
     
+    def tearDown(self):
+        self.client.logout()
+
+    def test_redirects_if_not_logged_in(self):
+        self.client.logout()
+        response = self.client.get("/index/")
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, "/login/?next=/index/")
+
     def test_get(self):
         response = self.client.get("/index/")
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertContains(response, "<h1 class='main'>Pick your cars and see which suits you better.</h1>", html=True)
-    
+
     def test_view_uses_correct_template(self):
         response = self.client.get("/index/")
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'index.html')
+
+    def test_view_response_context(self):
+        response = self.client.get("/index/")
+
+        self.assertIsInstance(response.context['cars'][0], Car)
+        self.assertEqual(len(response.context['cars']),9)
+
+class CarViewTests(TestCase):
+    def setUp(self):
+        self.client.login(username='test', password='testing1pass')
     
     def tearDown(self):
-        self.client.get('/logout/')
+        self.client.logout()
+
+    def test_redirects_if_not_logged_in(self):
+        self.client.logout()
+        response = self.client.get("/car/Cayenne")
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, "/login/?next=/car/Cayenne")
+
+    def test_get(self):
+        response = self.client.get("/car/Cayenne")
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertContains(response, "<h1 class='display-3'><b>Porsche Cayenne</b></h1>", html=True)
+        self.assertContains(response, "<button type='button' class='btn btn-info'>Read/Leave a comment</button>", html=True)
+    
+    def test_view_uses_correct_template(self):
+        response = self.client.get("/car/Cayenne")
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertTemplateUsed(response, 'car.html')
+
+    def test_view_response_context(self):
+        response = self.client.get("/car/Cayenne")
+
+        self.assertIsInstance(response.context['images'][0], Image)
+        self.assertIsInstance(response.context['car'],Car)
+        self.assertEqual(len(response.context['images']), 3)
 
 class CommentFormViewTests(TestCase):
     def setUp(self):
-        self.client.post("/login/", data={'username':'test', 'password':'testing1pass'})
+        self.client.login(username='test', password='testing1pass')
+    
+    def tearDown(self):
+        self.client.logout()
+    
+    def test_redirects_if_not_logged_in(self):
+        self.client.logout()
+        response = self.client.get("/car_comments/Cayenne/")
 
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, "/login/?next=/car_comments/Cayenne/")
+    
     def test_get(self):
         response = self.client.get("/car_comments/Cayenne/")
 
@@ -55,3 +137,12 @@ class CommentFormViewTests(TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'car_comments.html')
+
+    def test_view_response_context(self):
+        response = self.client.get("/car_comments/Cayenne/")
+
+        self.assertIsInstance(response.context['comments'][0], Comment)
+        self.assertIsInstance(response.context['car'],Car)
+        self.assertIsInstance(response.context['comment_form'], CommentForm)
+        self.assertEqual(response.context['average_rating'], 8.5)
+        self.assertEqual(len(response.context['comments']), 2)

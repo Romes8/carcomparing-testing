@@ -13,6 +13,11 @@ class CommentFormTests(TestCase):
 
         self.assertEqual(form.errors['name'], ["Should not end with a full stop"])
 
+    def test_name_contains_invalid_characters(self):
+        form = CommentForm(data={'name':'J#oe'})
+
+        self.assertEqual(form.errors['name'], ["Should contain only letters (a-z/A-Z)"])
+
     def test_a_invalid_email(self):
         form = CommentForm(data={'email': "mom@you"})
 

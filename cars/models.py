@@ -37,6 +37,8 @@ class Image(models.Model):
     link = models.CharField(max_length=150)
     car_id = models.ForeignKey('Car', on_delete=models.CASCADE)
 
+    class Meta:
+        db_table = 'car_image'
 
 class Comment(models.Model):
     car = models.ForeignKey('Car', on_delete=models.CASCADE, related_name='comments')
@@ -49,6 +51,7 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['created_on']
+        db_table = 'car_comment'
     
     def __str__(self):
         return 'Comment {} by {}'.format(self.body, self.name)

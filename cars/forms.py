@@ -10,7 +10,7 @@ class CommentForm(forms.ModelForm):
     
     def clean_name(self):
         name = self.cleaned_data['name']
-        
+        invalid_characters = ['!', '@', "#"]
         if not name:
             return name
         
@@ -20,6 +20,8 @@ class CommentForm(forms.ModelForm):
         if name.endswith('.'):
             self.add_error('name', "Should not end with a full stop")
         
+        if not name.isalpha():
+            self.add_error('name', "Should contain only letters (a-z/A-Z)")
         return name
 
     def clean_rating(self):
