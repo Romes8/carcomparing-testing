@@ -3,6 +3,9 @@
 {% block content %}
 <div class="lead center background" >
     <h1 class="display-4 text-center">Pick the cars to compare</h1>
+    {% if result == True %}
+      <h2 style="color: red">Fill in both fields</h2>
+    {% endif %}
 <div class="container mt-5">
 <form autocomplete="off" action="compare/" class="row justify-content-sm-center">
     <div class="col col-lg-2 autocomplete">

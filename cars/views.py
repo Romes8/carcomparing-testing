@@ -23,7 +23,6 @@ def home_page(request):
 @login_required
 def index_page(request):
     cars = get_list_or_404(Car)
-    print(cars)
     return render(request, 'index.html', {'cars':cars})
 
 
@@ -61,16 +60,27 @@ def car_page(request, model):
 
 @login_required
 def compare_page(request):
+    
     car_name1 = request.GET.get('car1')
     car_name2 = request.GET.get('car2')
+
     
-    car1 = func.get_car(car_name1)
-    car2 = func.get_car(car_name2)
-    
-    print(car1['power'])
-    result = func.compare(car1, car2)
-    
-    return render(request, "compare.html", {'car1': car1, 'car2': car2, 'result': result})
+    if(car_name1 != "" and car_name2 != ""):
+        result = False
+
+        car1 = func.get_car(car_name1)
+        car2 = func.get_car(car_name2)
+        
+        print(car1['power'])
+        result = func.compare(car1, car2)
+        
+        return render(request, "compare.html", {'car1': car1, 'car2': car2, 'result': result})
+    else:
+        print("car has empty field name")
+        args ={}
+        args["result"] = True
+        return render(request, "choose_compare_page.html", args)
+
 
 @login_required
 def choose_compare_page(request):
