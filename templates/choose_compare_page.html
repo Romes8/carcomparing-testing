@@ -21,12 +21,12 @@
     </div>
     <br>
     <div class="row justify-content-center">
-    <input class="col-3 btn btn-outline-success mt-3" type="submit" value="Compare">
+    <input id="submit_btn" class="col-3 btn btn-outline-success mt-3" type="submit" value="Compare">
     </div>    
   </form>
   </div>
 </div>
-
+{{ models|json_script:"models-data" }}
   <style>
 .center {
   padding: 15% 0;
@@ -159,7 +159,7 @@ input[type=submit] {
           closeAllLists(e.target);
       });
     }
-    var cars = ["Porsche2","Porsche","Porsche Panamera Turbo S", "Mercedes S Class", "Jaguar XE", "Range Rover Velar", "Tesla X", "BMW MX7"];
+    var cars = JSON.parse(document.getElementById('models-data').textContent);
 
     autocomplete(document.getElementById("car1"), cars);
     autocomplete(document.getElementById("car2"), cars);

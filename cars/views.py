@@ -93,7 +93,11 @@ def compare_page(request):
 
 @login_required
 def choose_compare_page(request):
-    return render(request, 'choose_compare_page.html')
+    cars = get_list_or_404(Car)
+    models = []
+    for car in cars:
+        models.append(car.car_model)
+    return render(request, 'choose_compare_page.html', {'models':models})
 
 @login_required
 def car_comment(request, model):

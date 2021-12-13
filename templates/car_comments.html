@@ -1,20 +1,40 @@
 {% extends 'base.html' %} 
 {% block content %}
-
 <div class="container">
-  <div class="row">
-    <div class="col-md-6 card mb-4  mt-3 left  top">
+<table align="center">
+  <tr>
+    <td>
+    <div class="card mb-4  mt-3 left  top">
       <div class="card-body">
         <h1>{% block title %} 
             {{ car.car_brand }} {{car.car_model}} 
             {% endblock title %}</h1>
         <p class=" card-text">{{ car.car_description}} </p>
-        <p class="card-text "><i>€ {{car.price}}</i></p>
-        <p class="card-text "><i>Average Rating: <b style="color: darkgoldenrod;">{{average_rating}}/10</b></i></p>
+        <p class="card-text "><i name="price">€ {{car.price}}</i></p>
+        <p class="card-text "><i name="rating">Average Rating: <b style="color: darkgoldenrod;">{{average_rating}}/10</b></i></p>
       </div>
     </div>
-
-    <div class="col-md-6 card mb-4  mt-3 ">
+    </td>
+    <td rowspan="2">
+      <div class=" card mb-4  mt-3 ">
+      <div class="card-body">
+        {% if new_comment %}
+        <div class="alert alert-success" role="alert">
+          Your comment is awaiting moderation
+        </div>
+        {% else %}
+        <h3>Leave a comment</h3>
+        <form method="post" style="margin-top: 1.3em;">
+          {{ comment_form.as_p }}
+          {% csrf_token %}
+          <button id="submit_btn" type="submit" class="btn btn-primary  btn-lg">Submit</button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+  </td> </tr>
+  <tr><td>
+      <div class="card mb-4  mt-3 ">
       <div class="card-body">
         <!-- comments -->
         <h2>{{ comments.count }} comments</h2>
@@ -33,22 +53,7 @@
         {% endfor %}
       </div>
     </div>
-    <div class="col-md-6 card mb-4  mt-3 ">
-      <div class="card-body">
-        {% if new_comment %}
-        <div class="alert alert-success" role="alert">
-          Your comment is awaiting moderation
-        </div>
-        {% else %}
-        <h3>Leave a comment</h3>
-        <form method="post" style="margin-top: 1.3em;">
-          {{ comment_form.as_p }}
-          {% csrf_token %}
-          <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
-        </form>
-        {% endif %}
-      </div>
+    </td></tr>
+    </table>
     </div>
-  </div>
-</div>
 {% endblock content %}
